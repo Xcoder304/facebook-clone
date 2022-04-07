@@ -2,6 +2,7 @@ import React from "react";
 // components
 import Header from "./components/header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home/Home";
 
 // styles
 import "./styles/app.css";
@@ -14,7 +15,7 @@ const App = () => {
 
         <div className="app__body">
           <Routes>
-            <Route path="/" element={<h1>hello this is Home</h1>} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </div>

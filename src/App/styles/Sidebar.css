@@ -1,0 +1,66 @@
+.sidebar {
+  flex: 0.2;
+  padding: 20px 0 0 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: sticky;
+  left: 0;
+  top: 0;
+}
+.sidebar .sidebar__userProfile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  padding: 6px 10px;
+  transition: 0.1s ease-out;
+}
+.sidebar .sidebar__userProfile:hover {
+  background: var(--samigray);
+}
+.sidebar__userProfile .userProfile__img {
+  width: 1.8em;
+  height: 1.8em;
+}
+.sidebar__userProfile > span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fontBlack);
+  text-transform: capitalize;
+}
+
+.sidebarOption__container .sidebarOption__option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  padding: 6px 10px;
+  transition: 0.1s ease-out;
+  margin-bottom: 10px;
+}
+.sidebarOption__container .sidebarOption__option:hover {
+  background: var(--samigray);
+}
+
+.sidebarOption__option .option__img {
+  width: 1.8em;
+  height: 1.8em;
+}
+.option__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sidebarOption__container .sidebarOption__option > span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fontBlack);
+  text-transform: capitalize;
+}

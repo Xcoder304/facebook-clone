@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   padding: 0 0.6%;
   background: var(--white);
   box-shadow: 0 0.3px 6px rgba(0, 0, 0, 0.3);
@@ -57,7 +60,7 @@
 
 .header__navbar > ul a li {
   position: relative;
-  padding: 7px 40px;
+  padding: 11px 40px;
   margin: 0 10px;
   cursor: pointer;
   transition: 0.2s ease-in;
@@ -85,7 +88,7 @@
   height: 2.4px;
   background: var(--blue);
   left: 0;
-  bottom: -5px;
+  bottom: -1px;
   border: none;
   border-radius: 50px;
 }
@@ -93,6 +96,11 @@
 .header__navbar > ul a.active li .navbar__icons {
   color: var(--blue);
 }
+
+.header__navbar > ul a.active li:hover {
+  background: none;
+}
+
 /* ************************ */
 
 .header__navbar > ul a li .navbar__icons.active {

@@ -1,0 +1,8 @@
+.app__body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  gap: 30px;
+  background: var(--samiWhite);
+}
