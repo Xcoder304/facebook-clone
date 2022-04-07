@@ -1,6 +1,8 @@
 import React from "react";
-import Sidebar from "./Sidebar";
 
+// components/ Elements
+import Sidebar from "./Sidebar";
+import Storys from "./Storys";
 // style
 import "../../styles/Home.css";
 
@@ -9,7 +11,7 @@ const Home = () => {
     <>
       <Sidebar />
       <div className="home">
-        <h1>this is home</h1>
+        <Storys />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
 .home {
-  border: 1px solid blue;
-  flex: 0.8;
+  flex: 1;
+  padding: 30px 50px;
 }
