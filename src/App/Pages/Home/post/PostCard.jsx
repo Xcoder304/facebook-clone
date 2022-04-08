@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
+// components/ Elements
 import Avatar from "@mui/material/Avatar";
-import "../../../styles/postcard.css";
+import CommentsSec from "./CommentsSec";
+
+// styles
+import "../../../styles/post/postcard.css";
 
 // icons
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -10,6 +14,8 @@ import { GoComment } from "react-icons/go";
 import { BiShare } from "react-icons/bi";
 
 const PostCard = () => {
+  const [OpenComments, setOpenComments] = useState(false);
+
   return (
     <div className="postcard">
       {/* header */}
@@ -58,7 +64,10 @@ const PostCard = () => {
             <span>like</span>
           </div>
 
-          <div className="button">
+          <div
+            className="button"
+            onClick={() => setOpenComments(!OpenComments)}
+          >
             <GoComment className="icon" />
             <span>comment</span>
           </div>
@@ -69,6 +78,9 @@ const PostCard = () => {
           </div>
         </div>
       </div>
+
+      {/* comments Section */}
+      {OpenComments && <CommentsSec />}
     </div>
   );
 };

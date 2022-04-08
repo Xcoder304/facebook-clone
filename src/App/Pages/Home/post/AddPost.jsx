@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 
-import "../../../styles/addpost.css";
+import "../../../styles/post/addpost.css";
 
 const AddPost = () => {
   return (

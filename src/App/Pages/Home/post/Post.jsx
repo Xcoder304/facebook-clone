@@ -5,7 +5,7 @@ import AddPost from "./AddPost";
 import PostCard from "./PostCard";
 
 // styles
-import "../../../styles/post.css";
+import "../../../styles/post/post.css";
 
 const Post = () => {
   return (
