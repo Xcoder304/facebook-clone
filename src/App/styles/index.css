@@ -18,8 +18,9 @@ body {
   --white: #fff;
   --samiWhite: #f0f2f5;
   --blue: #1b74e4;
-  --gray: #606266;
+  --gray: #65676b;
   --lightgray: #f2f2f2;
+
   --samigray: #e4e6e9;
   --fontBlack: rgba(5, 5, 5, 1);
 }
