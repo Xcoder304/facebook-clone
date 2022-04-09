@@ -11,17 +11,21 @@
   outline: none;
   list-style: none;
 }
+/* #BBBDBF */
 body {
   overflow-x: hidden;
   font-family: "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
   /* colors */
   --white: #fff;
+  --white2: #f3f3f4;
   --samiWhite: #f0f2f5;
   --blue: #1b74e4;
   --gray: #65676b;
+  --gray2: #c5d0d4;
   --lightgray: #f2f2f2;
-
   --samigray: #e4e6e9;
+  --green: #abf326;
+  --red: #f32626;
   --fontBlack: rgba(5, 5, 5, 1);
 }
 html {

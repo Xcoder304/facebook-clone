@@ -4,7 +4,7 @@
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 400;
   padding: 0 0.6%;
   background: var(--white);
   box-shadow: 0 0.3px 6px rgba(0, 0, 0, 0.3);

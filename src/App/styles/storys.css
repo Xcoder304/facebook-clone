@@ -1,5 +1,6 @@
 .storys {
   width: 70vw;
+  z-index: 300;
 }
 .storys__wapper {
   width: 100% !important;

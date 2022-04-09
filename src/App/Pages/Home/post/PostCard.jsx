@@ -50,7 +50,10 @@ const PostCard = () => {
             </span>
           </div>
 
-          <div className="footer__status-comments">
+          <div
+            className="footer__status-comments"
+            onClick={() => setOpenComments(!OpenComments)}
+          >
             <span>
               <h5>20</h5> comments
             </span>
