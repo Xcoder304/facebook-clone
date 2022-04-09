@@ -1,16 +1,23 @@
 import React from "react";
-import { IoMdClose } from "react-icons/io";
+
+// components / Elmenets
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
+
+// icons
+import { IoMdClose } from "react-icons/io";
 
 import "../../../styles/post/createpost.css";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="createPost">
       <div className="createPost__wapper">
         <div className="wapper__top">
           <h3>create post</h3>
-          <div className="wappper__closeBtn">
+          <div className="wappper__closeBtn" onClick={() => navigate(-1)}>
             <IoMdClose className="icon" />
           </div>
         </div>

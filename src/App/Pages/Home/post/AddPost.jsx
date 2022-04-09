@@ -1,9 +1,13 @@
 import React from "react";
+
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 import "../../../styles/post/addpost.css";
 
 const AddPost = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="addPost">
       <div className="addPost__top">
@@ -11,7 +15,9 @@ const AddPost = () => {
           <Avatar alt="Remy Sharp" src="/broken-image.jpg"></Avatar>
         </div>
 
-        <span>What's on your mind, x?</span>
+        <span onClick={() => navigate("/createpost")}>
+          What's on your mind, x?
+        </span>
       </div>
 
       <div className="addPost__options">
@@ -22,7 +28,10 @@ const AddPost = () => {
           <h4>live video</h4>
         </div>
 
-        <div className="options__option">
+        <div
+          className="options__option"
+          onClick={() => navigate("/createpost")}
+        >
           <div className="option__img">
             <img src="../images/photos.png" />
           </div>

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // styles
-import "../../styles/storys.css";
+import "../../styles/components/storys.css";
 
 import "swiper/css";
 

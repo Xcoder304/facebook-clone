@@ -4,7 +4,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 
 // style
-import "../../styles/Sidebar.css";
+import "../../styles/components/Sidebar.css";
 
 const Sidebar = () => {
   return (

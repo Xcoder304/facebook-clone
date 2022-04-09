@@ -11,7 +11,7 @@ import { BsCaretDownFill } from "react-icons/bs";
 import NavbarOptions from "./NavbarOptions";
 
 // style
-import "../../styles/header.css";
+import "../../styles/components/header.css";
 
 const Header = () => {
   return (
