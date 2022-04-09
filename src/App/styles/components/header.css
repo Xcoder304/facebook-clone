@@ -167,6 +167,18 @@
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
+.headerOption {
+  width: 2.5em !important;
+  height: 2.5em !important;
+  background: var(--lightgray) !important;
+  margin: 0 5px !important;
+  display: grid !important;
+  place-content: center !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  transition: 0.2s ease-in-out !important;
+}
 .headerRight__options > span:hover {
   background: #e4e4e4;
 }
