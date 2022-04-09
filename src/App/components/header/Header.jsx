@@ -27,7 +27,6 @@ import "../../styles/components/header.css";
 
 const Header = () => {
   const [{ user }, dispatch] = ContextVal();
-  const [userInfo, setUserInfo] = useState([]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

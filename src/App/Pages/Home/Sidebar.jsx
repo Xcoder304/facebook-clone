@@ -2,20 +2,23 @@ import React from "react";
 
 // components/ Elements
 import Avatar from "@mui/material/Avatar";
+import { ContextVal } from "../../context/Context";
 
 // style
 import "../../styles/components/Sidebar.css";
 
 const Sidebar = () => {
+  const [{ user }, dispatch] = ContextVal();
+
   return (
     <div className="sidebar">
       <div className="sidebar__userProfile">
         <Avatar
-          alt="Remy Sharp"
-          src="https://mui.com/static/images/avatar/1.jpg"
+          alt={user?.displayName}
+          src={user?.photoURL}
           className="userProfile__img"
         ></Avatar>
-        <span>x hunter</span>
+        <span>{user?.displayName}</span>
       </div>
 
       <div className="sidebarOption__container">

@@ -2,21 +2,23 @@ import React from "react";
 
 import Avatar from "@mui/material/Avatar";
 import { useNavigate } from "react-router-dom";
+import { ContextVal } from "../../../context/Context";
 
 import "../../../styles/post/addpost.css";
 
 const AddPost = () => {
+  const [{ user }, dispatch] = ContextVal();
   const navigate = useNavigate();
 
   return (
     <div className="addPost">
       <div className="addPost__top">
         <div className="addPost__userProfile">
-          <Avatar alt="Remy Sharp" src="/broken-image.jpg"></Avatar>
+          <Avatar alt="Remy Sharp" src={user?.photoURL}></Avatar>
         </div>
 
         <span onClick={() => navigate("/createpost")}>
-          What's on your mind, x?
+          {`What's on your mind, ${user?.displayName}?`}
         </span>
       </div>
 

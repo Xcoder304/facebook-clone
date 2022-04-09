@@ -3,6 +3,7 @@ import React from "react";
 // components / Elmenets
 import Avatar from "@mui/material/Avatar";
 import { useNavigate } from "react-router-dom";
+import { ContextVal } from "../../../context/Context";
 
 // icons
 import { IoMdClose } from "react-icons/io";
@@ -10,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import "../../../styles/post/createpost.css";
 
 const CreatePost = () => {
+  const [{ user }, dispatch] = ContextVal();
   const navigate = useNavigate();
 
   return (
@@ -23,12 +25,15 @@ const CreatePost = () => {
         </div>
 
         <div className="wapper__userProfile">
-          <Avatar alt="Remy Sharp" src="/broken-image.jpg"></Avatar>
-          <h4>x hunter</h4>
+          <Avatar alt="Remy Sharp" src={user?.photoURL}></Avatar>
+          <h4>{user?.displayName}</h4>
         </div>
 
         <div className="wapper__input">
-          <input type="text" placeholder="What's on your mind, X?" />
+          <input
+            type="text"
+            placeholder={`What's on your mind, ${user?.displayName}?`}
+          />
         </div>
 
         <div className="wapper__buttons">
