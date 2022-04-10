@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // components / Elmenets
 import Avatar from "@mui/material/Avatar";
@@ -14,22 +14,46 @@ import { IoMdClose } from "react-icons/io";
 import "../../../styles/post/createpost.css";
 
 const CreatePost = () => {
-  const [{ user }, dispatch] = ContextVal();
+  const [{ user, FileType }, dispatch] = ContextVal();
   const navigate = useNavigate();
   const [userInputVal, setuserInputVal] = useState("");
-  const [image, setimage] = useState(null);
+  const [file, setfile] = useState(null);
+  const [CurrentFileType, setCurrentFileType] = useState(null);
 
-  const GetTheImage = (e) => {
+  const GetTheFile = (e) => {
     if (e.target.files[0]) {
-      setimage(e.target.files[0]);
+      setfile(e.target.files[0]);
     }
   };
 
-  const UploadFile = () => {
-    const storageRef = ref(storage, `images/${image.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
+  useEffect(() => {
+    if (file) {
+      if (
+        file.type == "image/png" ||
+        file.type == "image/jpeg" ||
+        file.type == "image/jpg" ||
+        file.type == "image/gif"
+      ) {
+        dispatch({
+          type: "CHANGE__FILE__TYPE",
+          FileType: "image",
+        });
+        setCurrentFileType("image");
+      }
+      if (file.type == "video/mp4") {
+        dispatch({
+          type: "CHANGE__FILE__TYPE",
+          FileType: "video",
+        });
+        setCurrentFileType("video");
+      }
+    }
+  }, [file]);
 
-    uploadTask.on(
+  const UploadImages = () => {
+    const storageRef = ref(storage, `images/${file.name}`);
+    const uploadImageTask = uploadBytesResumable(storageRef, file);
+    uploadImageTask.on(
       "state_changed",
       (snapshot) => {
         console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -38,19 +62,57 @@ const CreatePost = () => {
         alert(err.message);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        getDownloadURL(uploadImageTask.snapshot.ref).then((url) => {
           addDoc(collection(db, "post"), {
             file: url,
             time: serverTimestamp(),
             username: user?.displayName,
             userprofile: user?.photoURL,
             caption: userInputVal,
+            type: FileType,
           });
         });
-
         navigate("/");
       }
     );
+  };
+
+  const UploadVideos = () => {
+    const storageRef = ref(storage, `videos/${file.name}`);
+    const uploadVideoTask = uploadBytesResumable(storageRef, file);
+    uploadVideoTask.on(
+      "state_changed",
+      (snapshot) => {
+        console.log((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      },
+      (err) => {
+        alert(err.message);
+      },
+      () => {
+        getDownloadURL(uploadVideoTask.snapshot.ref).then((url) => {
+          addDoc(collection(db, "post"), {
+            file: url,
+            time: serverTimestamp(),
+            username: user?.displayName,
+            userprofile: user?.photoURL,
+            caption: userInputVal,
+            type: FileType,
+          });
+        });
+        navigate("/");
+      }
+    );
+  };
+
+  console.log(file?.type);
+
+  const UploadFile = () => {
+    if (CurrentFileType == "image") {
+      UploadImages();
+    }
+    if (CurrentFileType == "video") {
+      UploadVideos();
+    }
   };
 
   return (
@@ -80,31 +142,19 @@ const CreatePost = () => {
         <div className="wapper__buttons">
           <div className="wapper__button">
             <label htmlFor="file" className="photos__btn">
-              upload photos
+              upload files
             </label>
             <input
               type="file"
               style={{ visibility: "hidden" }}
               id="file"
-              accept="image/x-png,image/gif,image/jpeg"
-              onChange={GetTheImage}
-            />
-          </div>
-
-          <div className="wapper__button">
-            <label htmlFor="file2" className="video__btn">
-              upload videos
-            </label>
-            <input
-              type="file"
-              style={{ visibility: "hidden" }}
-              id="file2"
-              accept="video/mp4,video/x-m4v,video/*"
+              accept="/*"
+              onChange={GetTheFile}
             />
           </div>
         </div>
 
-        <h3 style={{ padding: "0 3% 10px" }}>{image?.name}</h3>
+        <h3 style={{ padding: "0 3% 10px" }}>{file?.name}</h3>
 
         <div className="wapper__postBtn">
           <button onClick={UploadFile}>post</button>

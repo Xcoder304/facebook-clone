@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // components
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AllRoutes from "./Routes";
@@ -12,7 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import "./styles/app.css";
 
 const App = () => {
-  const [{ user }, dispatch] = ContextVal();
+  const [{ user, FileType }, dispatch] = ContextVal();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (authUser) => {
@@ -31,8 +31,6 @@ const App = () => {
 
     return () => unsub();
   }, []);
-
-  console.log(user);
 
   return (
     <Router>

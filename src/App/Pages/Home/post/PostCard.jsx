@@ -24,13 +24,15 @@ import { GoComment } from "react-icons/go";
 import { BiShare } from "react-icons/bi";
 import { AiTwotoneLike } from "react-icons/ai";
 
-const PostCard = ({ id, file, time, username, userprofile, caption }) => {
+const PostCard = ({ id, file, time, username, userprofile, caption, type }) => {
   const [OpenComments, setOpenComments] = useState(false);
   const [{ user }, dispatch] = ContextVal();
 
   const [Likes, setLikes] = useState([]);
   const [Totalcomments, setTotalcoments] = useState([]);
   const [hasLiked, sethasLiked] = useState(false);
+  const [isFileImage, setFileImage] = useState(false);
+  const [isFileVideo, setFileVideo] = useState(false);
 
   // getting all the likes
   useEffect(() => {
@@ -40,8 +42,6 @@ const PostCard = ({ id, file, time, username, userprofile, caption }) => {
       setLikes(snapshot.docs.map((data) => data));
     });
   }, [db]);
-
-  console.log(userprofile);
 
   // this fucntion will check if i liked or not
   useEffect(() => {
@@ -90,8 +90,9 @@ const PostCard = ({ id, file, time, username, userprofile, caption }) => {
       </div>
 
       {/* body */}
-      <div className="postcard__image">
-        <img src={file} />
+      <div className="postcard__file">
+        {/* <img src={file} /> */}
+        {type == "image" ? <img src={file} /> : <video src={file} controls />}
       </div>
 
       {/* footer */}

@@ -20,13 +20,14 @@ const Post = () => {
     });
   }, []);
 
-  console.log(post);
-
   return (
     <div className="post">
       <AddPost />
       {post.map(
-        ({ id, data: { file, time, username, userprofile, caption } }) => {
+        ({
+          id,
+          data: { file, time, username, userprofile, caption, type },
+        }) => {
           return (
             <PostCard
               key={id}
@@ -36,6 +37,7 @@ const Post = () => {
               username={username}
               userprofile={userprofile}
               caption={caption}
+              type={type}
             />
           );
         }

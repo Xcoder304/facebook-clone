@@ -1,5 +1,6 @@
 const initailstate = {
   user: null,
+  FileType: null,
 };
 
 const reducer = (state, action) => {
@@ -14,6 +15,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+      };
+    case "CHANGE__FILE__TYPE":
+      return {
+        ...state,
+        FileType: action.FileType,
       };
     default:
       return state;
