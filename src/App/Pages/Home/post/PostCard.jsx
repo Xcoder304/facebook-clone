@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // components/ Elements
 import Avatar from "@mui/material/Avatar";
 import CommentsSec from "./CommentsSec";
+import { db } from "../../../firebase/config";
+import {
+  collection,
+  query,
+  onSnapshot,
+  orderBy,
+  deleteDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { ContextVal } from "../../../context/Context";
 
 // styles
 import "../../../styles/post/postcard.css";
@@ -13,8 +24,41 @@ import { AiOutlineLike } from "react-icons/ai";
 import { GoComment } from "react-icons/go";
 import { BiShare } from "react-icons/bi";
 
-const PostCard = () => {
+const PostCard = ({ id, file, time, username, userprofile }) => {
   const [OpenComments, setOpenComments] = useState(false);
+  const [{ user }, dispatch] = ContextVal();
+
+  const [Likes, setLikes] = useState([]);
+  const [hasLiked, sethasLiked] = useState(false);
+
+  // getting all the likes
+  useEffect(() => {
+    const collectionRef = collection(db, "post", id, "likes");
+    const q = query(collectionRef);
+    const display = onSnapshot(q, (snapshot) => {
+      setLikes(snapshot.docs.map((data) => data));
+    });
+  }, [db]);
+
+  // this fucntion will check if i liked or not
+  useEffect(() => {
+    sethasLiked(Likes.findIndex((like) => like?.id === user?.uid) != -1);
+  });
+
+  // if you liked the post it will delete that if you dont like it. it will add your like
+  const LikeTheVideo = async () => {
+    if (hasLiked) {
+      await deleteDoc(doc(db, "post", id, "likes", user?.uid));
+    } else {
+      await setDoc(doc(db, "post", id, "likes", user?.uid), {
+        username: user?.displayName,
+      });
+    }
+  };
+
+  console.log(hasLiked);
+  console.log(Likes);
+  console.log(user);
 
   return (
     <div className="postcard">
@@ -22,10 +66,10 @@ const PostCard = () => {
       <div className="postcard__top">
         <div className="postcard__top-left">
           <div className="userProfile">
-            <Avatar alt="Remy Sharp" src="/broken-image.jpg"></Avatar>
+            <Avatar alt="Remy Sharp" src={userprofile}></Avatar>
             <div className="userInfo">
-              <h4>x hunter</h4>
-              <span>20 Mar 8pm</span>
+              <h4>{username}</h4>
+              <span>{new Date(time?.toDate()).toUTCString()}</span>
             </div>
           </div>
         </div>
@@ -37,7 +81,7 @@ const PostCard = () => {
 
       {/* body */}
       <div className="postcard__image">
-        <img src="https://scontent.fhdd4-1.fna.fbcdn.net/v/t39.30808-6/278047420_137066635512223_6901095229187063210_n.jpg?stp=dst-jpg_p180x540&_nc_cat=108&ccb=1-5&_nc_sid=8bfeb9&_nc_eui2=AeFPlAHSqLtrShUl9kNibXjAZOaz0DqCoQxk5rPQOoKhDOl9voSnana9PHNuhOix8OxTEoCtGTNG41xJd0SrnUY3&_nc_ohc=6KSYVHCy0r0AX-uFUCP&_nc_ht=scontent.fhdd4-1.fna&oh=00_AT_Vgot4N76klrEFImTnHFFHHE5Rq7bZsWxwh5vDAeSpqQ&oe=625382E7" />
+        <img src={file} />
       </div>
 
       {/* footer */}
@@ -46,7 +90,7 @@ const PostCard = () => {
         <div className="footer__status">
           <div className="footer__status-like">
             <span>
-              <h5>45</h5> Likes
+              <h5>{Likes.length}</h5> Likes
             </span>
           </div>
 
@@ -62,8 +106,8 @@ const PostCard = () => {
 
         {/* buttons */}
         <div className="footer__buttons">
-          <div className="button">
-            <AiOutlineLike className="icon" />
+          <div className="button" onClick={LikeTheVideo}>
+            <AiOutlineLike className={`icon ${hasLiked && "liked"}`} />
             <span>like</span>
           </div>
 

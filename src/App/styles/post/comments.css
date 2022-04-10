@@ -3,6 +3,34 @@
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   padding: 18px 2.5% 20px;
 }
+.add__comment {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.add__comment > form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.add__comment > form > .userProfile {
+  width: 1.8em;
+  height: 1.8em;
+}
+.add__comment > form > input {
+  flex: 0.9;
+  margin: 0 10px;
+  padding: 13px 10px;
+  border: none;
+  border-radius: 70px;
+  font-size: 1rem;
+  font-weight: 400;
+  background: #f0f2f5;
+}
+.add__comment > form .add__comment-btn {
+  flex: 0.1;
+  height: 3em;
+  background: var(--blue);
+}
 .comments__comment {
   display: flex;
   align-items: center;
