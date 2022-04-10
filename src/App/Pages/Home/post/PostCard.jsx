@@ -8,7 +8,6 @@ import {
   collection,
   query,
   onSnapshot,
-  orderBy,
   deleteDoc,
   doc,
   setDoc,
@@ -25,7 +24,7 @@ import { GoComment } from "react-icons/go";
 import { BiShare } from "react-icons/bi";
 import { AiTwotoneLike } from "react-icons/ai";
 
-const PostCard = ({ id, file, time, username, userprofile }) => {
+const PostCard = ({ id, file, time, username, userprofile, caption }) => {
   const [OpenComments, setOpenComments] = useState(false);
   const [{ user }, dispatch] = ContextVal();
 
@@ -41,6 +40,8 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
       setLikes(snapshot.docs.map((data) => data));
     });
   }, [db]);
+
+  console.log(userprofile);
 
   // this fucntion will check if i liked or not
   useEffect(() => {
@@ -71,7 +72,7 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
       <div className="postcard__top">
         <div className="postcard__top-left">
           <div className="userProfile">
-            <Avatar alt="Remy Sharp" src={userprofile}></Avatar>
+            <Avatar alt={username} src={userprofile}></Avatar>
             <div className="userInfo">
               <h4>{username}</h4>
               <span>{new Date(time?.toDate()).toUTCString()}</span>
@@ -81,6 +82,10 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
 
         <div className="postcard__top-right">
           <HiDotsHorizontal className="icon" />
+        </div>
+
+        <div className="postcard__caption">
+          <p>{caption}</p>
         </div>
       </div>
 

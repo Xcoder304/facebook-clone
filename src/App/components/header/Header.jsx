@@ -21,6 +21,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import Avatar from "@mui/material/Avatar";
 
 // style
 import "../../styles/components/header.css";
@@ -65,7 +66,7 @@ const Header = () => {
       <div className="header__Right">
         <div className="headerRight__userProfile">
           <div className="userProfile__img">
-            <img src={user?.photoURL} />
+            <Avatar alt={user?.displayName} src={user?.photoURL}></Avatar>
           </div>
 
           <span style={{ textTransform: "uppercase" }}>

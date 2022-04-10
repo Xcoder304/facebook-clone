@@ -115,7 +115,7 @@
   user-select: none;
 }
 .headerRight__userProfile {
-  width: 65px;
+  width: 70px;
   border: none;
   border-radius: 40px;
   height: 42px;
@@ -146,8 +146,8 @@
   border-radius: 50%;
 }
 .headerRight__userProfile > span {
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  margin-left: 10px;
   color: var(--fontBlack);
 }
 

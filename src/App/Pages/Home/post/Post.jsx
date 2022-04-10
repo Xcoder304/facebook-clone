@@ -14,7 +14,7 @@ const Post = () => {
 
   useEffect(() => {
     const collectionRef = collection(db, "post");
-    const q = query(collectionRef);
+    const q = query(collectionRef, orderBy("time", "desc"));
     const display = onSnapshot(q, (snapshot) => {
       setpost(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
     });
@@ -25,18 +25,21 @@ const Post = () => {
   return (
     <div className="post">
       <AddPost />
-      {post.map(({ id, data: { file, time, username, userprofile } }) => {
-        return (
-          <PostCard
-            key={id}
-            id={id}
-            file={file}
-            time={time}
-            username={username}
-            userprofile={userprofile}
-          />
-        );
-      })}
+      {post.map(
+        ({ id, data: { file, time, username, userprofile, caption } }) => {
+          return (
+            <PostCard
+              key={id}
+              id={id}
+              file={file}
+              time={time}
+              username={username}
+              userprofile={userprofile}
+              caption={caption}
+            />
+          );
+        }
+      )}
     </div>
   );
 };
