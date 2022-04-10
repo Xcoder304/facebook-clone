@@ -33,6 +33,7 @@
 }
 .comments__comment {
   display: flex;
+  margin-bottom: 20px;
   align-items: center;
   gap: 6px;
 }

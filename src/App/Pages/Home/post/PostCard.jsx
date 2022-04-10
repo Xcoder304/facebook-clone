@@ -23,12 +23,14 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import { AiOutlineLike } from "react-icons/ai";
 import { GoComment } from "react-icons/go";
 import { BiShare } from "react-icons/bi";
+import { AiTwotoneLike } from "react-icons/ai";
 
 const PostCard = ({ id, file, time, username, userprofile }) => {
   const [OpenComments, setOpenComments] = useState(false);
   const [{ user }, dispatch] = ContextVal();
 
   const [Likes, setLikes] = useState([]);
+  const [Totalcomments, setTotalcoments] = useState([]);
   const [hasLiked, sethasLiked] = useState(false);
 
   // getting all the likes
@@ -56,9 +58,12 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
     }
   };
 
-  console.log(hasLiked);
-  console.log(Likes);
-  console.log(user);
+  // getting the total comments length
+  useEffect(() => {
+    onSnapshot(query(collection(db, "post", id, "comments")), (snapshot) => {
+      setTotalcoments(snapshot.docs);
+    });
+  }, [db]);
 
   return (
     <div className="postcard">
@@ -99,7 +104,7 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
             onClick={() => setOpenComments(!OpenComments)}
           >
             <span>
-              <h5>20</h5> comments
+              <h5>{Totalcomments.length}</h5> comments
             </span>
           </div>
         </div>
@@ -107,7 +112,11 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
         {/* buttons */}
         <div className="footer__buttons">
           <div className="button" onClick={LikeTheVideo}>
-            <AiOutlineLike className={`icon ${hasLiked && "liked"}`} />
+            {hasLiked ? (
+              <AiTwotoneLike className="icon liked" />
+            ) : (
+              <AiOutlineLike className="icon" />
+            )}
             <span>like</span>
           </div>
 
@@ -127,7 +136,7 @@ const PostCard = ({ id, file, time, username, userprofile }) => {
       </div>
 
       {/* comments Section */}
-      {OpenComments && <CommentsSec />}
+      {OpenComments && <CommentsSec id={id} />}
     </div>
   );
 };

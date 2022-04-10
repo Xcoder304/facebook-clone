@@ -143,7 +143,28 @@ h4 {
 .footer__buttons > .button > .icon.liked {
   font-size: 1.4rem;
   color: var(--blue);
+  animation: liked 800ms ease-in forwards;
+  transform: rotate(0) scale(1);
 }
+@keyframes liked {
+  0% {
+    transform: rotate(0) scale(1);
+    transition: 0.3s ease-in;
+  }
+  40% {
+    transition: 0.3s ease-out;
+    transform: rotate(-20deg) scale(1.2);
+  }
+  90% {
+    transition: 0.3s ease-out;
+    transform: rotate(-20deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    transition: 0.3s ease-in;
+  }
+}
+
 .footer__buttons > .button > span {
   color: var(--gray);
   font-size: 1rem;
