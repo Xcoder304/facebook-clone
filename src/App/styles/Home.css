@@ -1,4 +1,10 @@
 .home {
   flex: 1;
-  padding: 120px 20px;
+  padding: 80px 50px;
+}
+
+@media (max-width: 868px) {
+  .home {
+    padding: 120px 20px;
+  }
 }

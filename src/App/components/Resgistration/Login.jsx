@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { ContextVal } from "../../context/Context";
+import Loading from "../Loading";
 
 // styles
 import "../../styles/components/login.css";
@@ -18,11 +19,14 @@ const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [{ user }, dispatch] = ContextVal();
+  const [loading, setloading] = useState(false);
 
   const LoginTheUser = async (e) => {
     e.preventDefault();
+    setloading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      setloading(false);
     } catch (err) {
       alert(err.message);
     }
@@ -41,48 +45,51 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login__info">
-        <h1>facebook</h1>
-        <span>
-          Facebook helps you connect and share with the people in your life.
-        </span>
-      </div>
-      <div className="login__wapper">
-        <form onSubmit={LoginTheUser}>
-          <input
-            type="email"
-            required
-            placeholder="Email address"
-            onChange={(e) => setemail(e.target.value)}
-          />
-          <input
-            type="password"
-            required
-            placeholder="Password"
-            onChange={(e) => setpassword(e.target.value)}
-          />
+    <>
+      {loading && <Loading />}
+      <div className="login">
+        <div className="login__info">
+          <h1>facebook</h1>
+          <span>
+            Facebook helps you connect and share with the people in your life.
+          </span>
+        </div>
+        <div className="login__wapper">
+          <form onSubmit={LoginTheUser}>
+            <input
+              type="email"
+              required
+              placeholder="Email address"
+              onChange={(e) => setemail(e.target.value)}
+            />
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              onChange={(e) => setpassword(e.target.value)}
+            />
 
-          <button type="submit" className="login__btn">
-            log in
-          </button>
+            <button type="submit" className="login__btn">
+              log in
+            </button>
 
-          <button
-            type="button"
-            className="login__btn"
-            onClick={LoginWithgoogle}
-          >
-            log in with google
-          </button>
-        </form>
+            <button
+              type="button"
+              className="login__btn"
+              onClick={LoginWithgoogle}
+            >
+              log in with google
+            </button>
+          </form>
 
-        <div className="login__createAccout">
-          <button onClick={() => navigate("/signup")}>
-            create new account
-          </button>
+          <div className="login__createAccout">
+            <button onClick={() => navigate("/signup")}>
+              create new account
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

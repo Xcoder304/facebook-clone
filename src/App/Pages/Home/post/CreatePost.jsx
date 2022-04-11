@@ -7,6 +7,7 @@ import { ContextVal } from "../../../context/Context";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../../firebase/config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import Laoding from "../../../components/Loading";
 
 // icons
 import { IoMdClose } from "react-icons/io";
@@ -19,6 +20,7 @@ const CreatePost = () => {
   const [userInputVal, setuserInputVal] = useState("");
   const [file, setfile] = useState(null);
   const [CurrentFileType, setCurrentFileType] = useState(null);
+  const [loading, setloading] = useState(false);
 
   const GetTheFile = (e) => {
     if (e.target.files[0]) {
@@ -51,6 +53,7 @@ const CreatePost = () => {
   }, [file]);
 
   const UploadImages = () => {
+    setloading(true);
     const storageRef = ref(storage, `images/${file.name}`);
     const uploadImageTask = uploadBytesResumable(storageRef, file);
     uploadImageTask.on(
@@ -72,12 +75,14 @@ const CreatePost = () => {
             type: FileType,
           });
         });
+        setloading(false);
         navigate("/");
       }
     );
   };
 
   const UploadVideos = () => {
+    setloading(true);
     const storageRef = ref(storage, `videos/${file.name}`);
     const uploadVideoTask = uploadBytesResumable(storageRef, file);
     uploadVideoTask.on(
@@ -99,6 +104,7 @@ const CreatePost = () => {
             type: FileType,
           });
         });
+        setloading(false);
         navigate("/");
       }
     );
@@ -116,51 +122,54 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="createPost">
-      <div className="createPost__wapper">
-        <div className="wapper__top">
-          <h3>create post</h3>
-          <div className="wappper__closeBtn" onClick={() => navigate(-1)}>
-            <IoMdClose className="icon" />
+    <>
+      {loading && <Laoding />}
+      <div className="createPost">
+        <div className="createPost__wapper">
+          <div className="wapper__top">
+            <h3>create post</h3>
+            <div className="wappper__closeBtn" onClick={() => navigate(-1)}>
+              <IoMdClose className="icon" />
+            </div>
           </div>
-        </div>
 
-        <div className="wapper__userProfile">
-          <Avatar alt="Remy Sharp" src={user?.photoURL}></Avatar>
-          <h4>{user?.displayName}</h4>
-        </div>
+          <div className="wapper__userProfile">
+            <Avatar alt="Remy Sharp" src={user?.photoURL}></Avatar>
+            <h4>{user?.displayName}</h4>
+          </div>
 
-        <div className="wapper__input">
-          <input
-            type="text"
-            placeholder={`What's on your mind, ${user?.displayName}?`}
-            value={userInputVal}
-            onChange={(e) => setuserInputVal(e.target.value)}
-          />
-        </div>
-
-        <div className="wapper__buttons">
-          <div className="wapper__button">
-            <label htmlFor="file" className="photos__btn">
-              upload files
-            </label>
+          <div className="wapper__input">
             <input
-              type="file"
-              style={{ visibility: "hidden" }}
-              id="file"
-              accept="/*"
-              onChange={GetTheFile}
+              type="text"
+              placeholder={`What's on your mind, ${user?.displayName}?`}
+              value={userInputVal}
+              onChange={(e) => setuserInputVal(e.target.value)}
             />
           </div>
-        </div>
 
-        <h3 style={{ padding: "0 3% 10px" }}>{file?.name}</h3>
+          <div className="wapper__buttons">
+            <div className="wapper__button">
+              <label htmlFor="file" className="photos__btn">
+                upload files
+              </label>
+              <input
+                type="file"
+                style={{ visibility: "hidden" }}
+                id="file"
+                accept="/*"
+                onChange={GetTheFile}
+              />
+            </div>
+          </div>
 
-        <div className="wapper__postBtn">
-          <button onClick={UploadFile}>post</button>
+          <h3 style={{ padding: "0 3% 10px" }}>{file?.name}</h3>
+
+          <div className="wapper__postBtn">
+            <button onClick={UploadFile}>post</button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

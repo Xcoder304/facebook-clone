@@ -81,7 +81,7 @@
     flex: 0;
     transition: 0.3s ease-in;
     position: fixed;
-    z-index: 999;
+    z-index: 500;
     width: 50%;
     height: 100vh;
     background: #fff;
