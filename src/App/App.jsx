@@ -12,7 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import "./styles/app.css";
 
 const App = () => {
-  const [{ user, FileType }, dispatch] = ContextVal();
+  const [{ user, OpenSideBar }, dispatch] = ContextVal();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (authUser) => {

@@ -34,8 +34,9 @@
 .addPost__options {
   margin-top: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   padding: 10px 5%;
 }
 

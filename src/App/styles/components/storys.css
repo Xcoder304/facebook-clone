@@ -59,3 +59,9 @@
   color: var(--white);
   font-weight: 500;
 }
+
+@media (max-width: 868px) {
+  .storys {
+    width: 88vw !important;
+  }
+}

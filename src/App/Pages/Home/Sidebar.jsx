@@ -8,10 +8,10 @@ import { ContextVal } from "../../context/Context";
 import "../../styles/components/Sidebar.css";
 
 const Sidebar = () => {
-  const [{ user }, dispatch] = ContextVal();
+  const [{ user, OpenSideBar }, dispatch] = ContextVal();
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${OpenSideBar && "active"}`}>
       <div className="sidebar__userProfile">
         <Avatar
           alt={user?.displayName}

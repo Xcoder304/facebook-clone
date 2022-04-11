@@ -7,6 +7,7 @@
   left: 0;
   top: 0;
 }
+
 .sidebar .sidebar__userProfile {
   display: flex;
   align-items: center;
@@ -63,4 +64,29 @@
   font-weight: 600;
   color: var(--fontBlack);
   text-transform: capitalize;
+}
+
+@media (min-width: 600px) {
+  .sidebar {
+    width: 30% !important;
+  }
+}
+
+@media (max-width: 868px) {
+  .sidebar {
+    display: none;
+    transition: 0.3s ease-in;
+  }
+  .sidebar.active {
+    flex: 0;
+    transition: 0.3s ease-in;
+    position: fixed;
+    z-index: 999;
+    width: 50%;
+    height: 100vh;
+    background: #fff;
+    padding: 70px 0 0 10px;
+    margin-top: 55px;
+    display: block;
+  }
 }

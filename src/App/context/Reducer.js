@@ -1,6 +1,7 @@
 const initailstate = {
   user: null,
   FileType: null,
+  OpenSideBar: false,
 };
 
 const reducer = (state, action) => {
@@ -20,6 +21,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         FileType: action.FileType,
+      };
+    case "OPEN__THE__SIDEBAR":
+      return {
+        ...state,
+        OpenSideBar: action.OpenSideBar,
       };
     default:
       return state;

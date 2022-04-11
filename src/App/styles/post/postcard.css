@@ -4,6 +4,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px;
   background: var(--white);
+  width: 100%;
 }
 .postcard__top {
   width: 100%;
@@ -198,4 +199,10 @@ h4 {
   font-size: 1rem;
   font-weight: 400;
   text-transform: capitalize;
+}
+
+@media (max-width: 868px) {
+  .footer__buttons > .button {
+    padding: 5px 4px !important;
+  }
 }

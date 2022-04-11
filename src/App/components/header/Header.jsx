@@ -22,12 +22,15 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Avatar from "@mui/material/Avatar";
+import { MdClose } from "react-icons/md";
+import { GrMenu } from "react-icons/gr";
+import { BiSearchAlt } from "react-icons/bi";
 
 // style
 import "../../styles/components/header.css";
 
 const Header = () => {
-  const [{ user }, dispatch] = ContextVal();
+  const [{ user, OpenSideBar }, dispatch] = ContextVal();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -43,6 +46,13 @@ const Header = () => {
     alert("sign out sucessfully");
   };
 
+  const OpenTheSideBar = () => {
+    dispatch({
+      type: "OPEN__THE__SIDEBAR",
+      OpenSideBar: !OpenSideBar,
+    });
+  };
+
   return (
     <header className="header">
       <div className="header__Left">
@@ -51,17 +61,26 @@ const Header = () => {
         </div>
         <div className="header__search">
           <form>
-            <BsSearch className="icon" />
+            <div className="search__icon">
+              <BsSearch className="icon" />
+            </div>
+
             <input type="text" placeholder="Search Facebook" />
           </form>
         </div>
       </div>
 
       <nav className="header__navbar">
+        <div className="navbar__close">
+          <MdClose className="icon" />
+        </div>
         <ul>
           <NavbarOptions />
         </ul>
       </nav>
+      <div className="hamburgar" onClick={OpenTheSideBar}>
+        <GrMenu className="icon" />
+      </div>
 
       <div className="header__Right">
         <div className="headerRight__userProfile">
@@ -75,7 +94,7 @@ const Header = () => {
         </div>
 
         <div className="headerRight__options">
-          <span>
+          <span className="menu">
             <CgMenuGridO className="option__icon" />
           </span>
 

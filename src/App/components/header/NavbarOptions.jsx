@@ -17,6 +17,7 @@ const NavbarOptions = () => {
           <li>
             <AiOutlineHome className="navbar__icons" />
             <span></span>
+            <h3>Home</h3>
           </li>
         </NavLink>
       </Tooltip>
@@ -26,6 +27,7 @@ const NavbarOptions = () => {
           <li>
             <IoPeopleOutline className="navbar__icons" />
             <span></span>
+            <h3>Friends</h3>
           </li>
         </NavLink>
       </Tooltip>
@@ -35,6 +37,7 @@ const NavbarOptions = () => {
           <li>
             <BsCameraVideo className="navbar__icons" />
             <span></span>
+            <h3>Videos</h3>
           </li>
         </NavLink>
       </Tooltip>
@@ -44,6 +47,7 @@ const NavbarOptions = () => {
           <li>
             <BsShop className="navbar__icons" />
             <span></span>
+            <h3>Market Place</h3>
           </li>
         </NavLink>
       </Tooltip>
@@ -53,6 +57,7 @@ const NavbarOptions = () => {
           <li>
             <MdOutlineGroups className="navbar__icons" />
             <span></span>
+            <h3>Groups</h3>
           </li>
         </NavLink>
       </Tooltip>
